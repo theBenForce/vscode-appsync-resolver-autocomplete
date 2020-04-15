@@ -1,0 +1,41 @@
+{
+    "DynamoGetItemRequest": {
+        "prefix": "getItemRequest",
+        "description": "The `GetItem` request mapping document lets you tell the AWS AppSync DynamoDB resolver to make a GetItem request to DynamoDB.",
+        "body": [
+            "{",
+            "    \"version\" : \"2017-02-28\",",
+            "    \"operation\" : \"GetItem\",",
+            "    \"key\" : {",
+            "        \"$1\": ${2:\\$util.dynamodb.toDynamoDB($3)},",
+            "        \"$4\": ${5:\\$util.dynamodb.toDynamoDB($6)}",
+            "    },",
+            "    \"consistentRead\" : true",
+            "}"
+        ]
+    },
+    "DynamoPutItemRequest": {
+        "prefix": "putItemRequest",
+        "description": "The PutItem request mapping document lets you tell the AWS AppSync DynamoDB resolver to make a PutItem request to DynamoDB.",
+        "body": [
+            "$LINE_COMMENT Reference: https://docs.aws.amazon.com/appsync/latest/devguide/resolver-mapping-template-reference-dynamodb.html#aws-appsync-resolver-mapping-template-reference-dynamodb-putitem",
+            "{",
+            "    \"version\" : \"2018-05-29\",",
+            "    \"operation\" : \"PutItem\",",
+            "    \"key\" : {",
+            "        \"$1\": ${2:\\$util.dynamodb.toDynamoDB($3)},",
+            "        \"$4\": ${5:\\$util.dynamodb.toDynamoDB($6)}",
+            "    },",
+            "    \"attributeValues\" : {",
+            "        $7",
+            "    },",
+            "    $LINE_COMMENT A condition to determine if the request should succeed or not, based on the state of the object already in DynamoDB.",
+            "    \"condition\" : {",
+            "       $8",
+            "    },",
+            "    $LINE_COMMENT A numeric value that represents the latest known version of an item. This value is optional. This field is used for Conflict Detection and is only supported on versioned data sources.",
+            "    \"_version\" : 1",
+            "}"
+        ]
+    }
+}
