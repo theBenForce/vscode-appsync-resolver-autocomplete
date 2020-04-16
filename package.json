@@ -1,7 +1,8 @@
 {
 	"name": "appsync-resolver-autocomplete",
-	"displayName": "appsync-resolver-autocomplete",
-	"description": "Adds autocomplete functionality to vscode when editing AWS AppSync resolver vtl files.",
+	"publisher": "theBenForce",
+	"displayName": "AppSync Resolver Autocomplete",
+	"description": "Autocomplete functionality when editing AWS AppSync resolver vtl files.",
 	"version": "0.0.1",
 	"engines": {
 		"vscode": "^1.44.0"
