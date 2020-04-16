@@ -2,7 +2,7 @@
 
 Adds autocomplete support for AppSync resolver templates when editing .vtl files.
 
-![Preview](./documentation/preview.png "Autocomplete preview")
+![Preview](https://raw.githubusercontent.com/theBenForce/vscode-appsync-resolver-autocomplete/master/documentation/preview.png "Autocomplete preview")
 
 ## References
 

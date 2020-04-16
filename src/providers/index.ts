@@ -2,6 +2,7 @@ import * as vscode from "vscode";
 import context from "./context";
 import util from "./util";
 import { AutocompleteData } from "./dataTypes";
+import { AppsyncSignatureHelpProvider } from "./AppsyncSignatureHelpProvider";
 
 const ROOT_PROPERTIES = [
     { names: ['context', 'ctx'], documentation: "The [`$context`](https://docs.aws.amazon.com/appsync/latest/devguide/resolver-context-reference.html#accessing-the-context) variable is a map that holds all of the contextual information for your resolver invocation." },
@@ -18,7 +19,12 @@ const register = (item: AutocompleteData.CompletionItemSettings) => vscode.langu
 
                     const result = new vscode.CompletionItem(label, property.kind ?? vscode.CompletionItemKind.Module);
                     result.documentation = new vscode.MarkdownString(property.documentation);
-                    result.commitCharacters = ['.'];
+                    if (property.kind === vscode.CompletionItemKind.Method) {
+                        result.commitCharacters = ['('];
+                        // result.insertText = `${label}()`;
+                    } else {
+                        result.commitCharacters = ['.'];
+                    }
                     return result;
                 })
                 ).reduce((result, next) => result.concat(next), []);
@@ -32,7 +38,12 @@ const register = (item: AutocompleteData.CompletionItemSettings) => vscode.langu
     '.' // triggered whenever a '.' is being typed
 );
 
-export default () => {
+export default (ctx: vscode.ExtensionContext) => {
+
+    ctx.subscriptions.push(
+        vscode.languages.registerSignatureHelpProvider(
+            'velocity', new AppsyncSignatureHelpProvider(), '(', ','));
+
     vscode.languages.registerCompletionItemProvider(
         'velocity',
         {
