@@ -39,7 +39,13 @@
 		"plugins": [
 			"@semantic-release/commit-analyzer",
 			"@semantic-release/release-notes-generator",
-			"@semantic-release/changelog",
+			[
+				"@semantic-release/changelog",
+				{
+					"changelogTitle": "# appsync-resolver-autocomplete Change Log",
+					"changelogFile": "CHANGELOG.md"
+				}
+			],
 			"semantic-release-vsce",
 			[
 				"@semantic-release/github",
