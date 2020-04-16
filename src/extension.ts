@@ -10,7 +10,8 @@ export function activate(context: vscode.ExtensionContext) {
 
 	console.info(`appsync resolver extension activated!`);
 
-	registerProviders();
+	registerProviders(context);
+
 }
 
 // this method is called when your extension is deactivated

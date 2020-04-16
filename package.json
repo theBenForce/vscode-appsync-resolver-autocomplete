@@ -7,6 +7,10 @@
 	"engines": {
 		"vscode": "^1.44.0"
 	},
+	"repository": {
+		"type": "git+ssh",
+		"url": "git@github.com:theBenForce/vscode-appsync-resolver-autocomplete.git"
+	},
 	"categories": [
 		"Other",
 		"Snippets"
@@ -20,7 +24,12 @@
 				"language": "velocity",
 				"path": "./snippets/dynamodb.json"
 			}
-		]
+		],
+		"signatureHelpProvider": {
+			"triggerCharacters": [
+				"("
+			]
+		}
 	},
 	"main": "./out/extension.js",
 	"scripts": {
