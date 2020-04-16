@@ -1,6 +1,6 @@
 
 import { AutocompleteData } from '../dataTypes';
-import { CompletionItemKind } from "vscode";
+import { CompletionItemKind, MarkdownString } from "vscode";
 import time from "./time";
 import list from "./list";
 import map from "./map";
@@ -19,7 +19,66 @@ export default [{
         { names: ["toJson"], kind: CompletionItemKind.Method, documentation: 'Takes an object and returns a “stringified” JSON representation of that object.' },
         { names: ["autoId"], kind: CompletionItemKind.Method, documentation: 'Returns a 128-bit randomly generated UUID.' },
         { names: ["unauthorized"], kind: CompletionItemKind.Method, documentation: 'Throws Unauthorized for the field being resolved. This can be used in request or response mapping templates to decide if the caller should be allowed to resolve the field.' },
-        { names: ["error"], kind: CompletionItemKind.Method, documentation: 'Throws a custom error. This can be used in request or response mapping templates if the template detects an error with the request or with the invocation result.' },
+        {
+            names: ["error"], kind: CompletionItemKind.Method, documentation: 'Throws a custom error. This can be used in request or response mapping templates if the template detects an error with the request or with the invocation result.',
+            signatures: [
+                {
+                    label: "error(String error)",
+                    documentation: "Throws a custom error. This can be used in request or response mapping templates if the template detects an error with the request or with the invocation result.",
+                    parameters: [
+                        {
+                            label: "String error"
+                        }
+                    ]
+                },
+                {
+                    label: "error(String error, String errorType)",
+                    documentation: new MarkdownString("Throws a custom error. This can be used in request or response mapping templates if the template detects an error with the request or with the invocation result. Additionally, an `errorType` can be specified."),
+                    parameters: [
+                        {
+                            label: "String error"
+                        },
+                        {
+                            label: "String errorType"
+                        }
+                    ]
+                },
+                {
+                    label: "error(String error, String errorType, Object data)",
+                    documentation: new MarkdownString("Throws a custom error. This can be used in request or response mapping templates if the template detects an error with the request or with the invocation result. Additionally, an `errorType` and a `data` field can be specified. The `data` value will be added to the corresponding error block inside `errors` in the GraphQL response. **Note**: `data` will be filtered based on the query selection set."),
+                    parameters: [
+                        {
+                            label: "String error"
+                        },
+                        {
+                            label: "String errorType"
+                        },
+                        {
+                            label: "Object data"
+                        }
+                    ]
+                },
+                {
+                    label: "error(String error, String errorType, Object data, Object errorInfo)",
+                    documentation: new MarkdownString("Throws a custom error. This can be used in request or response mapping templates if the template detects an error with the request or with the invocation result. Additionally, an `errorType` field, a `data` field, and a `errorInfo` field can be specified. The data value will be added to the corresponding error block inside errors in the GraphQL response. **Note**: `data` will be filtered based on the query selection set. The `errorInfo` value will be added to the corresponding `error` block inside `errors` in the GraphQL response. **Note**: `errorInfo` will NOT be filtered based on the query selection set."),
+                    parameters: [
+                        {
+                            label: "String error"
+                        },
+                        {
+                            label: "String errorType"
+                        },
+                        {
+                            label: "Object data"
+                        },
+                        {
+                            label: "Object errorInfo"
+                        }
+                    ]
+                }
+            ]
+
+        },
         { names: ["appendError"], kind: CompletionItemKind.Method, documentation: 'Appends a custom error. This can be used in request or response mapping templates if the template detects an error with the request or with the invocation result. Unlike `$util.error(String)`, the template evaluation will not be interrupted, so that data can be returned to the caller.' },
         { names: ["validate"], kind: CompletionItemKind.Method, documentation: 'If the condition is false, throw a CustomTemplateException with the specified message.' },
         { names: ["isNull"], kind: CompletionItemKind.Method, documentation: 'Returns true if the supplied object is null.' },

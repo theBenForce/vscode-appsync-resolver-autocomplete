@@ -1,6 +1,5 @@
 import * as vscode from "vscode";
-import context from "./context";
-import util from "./util";
+import allTypes from "./allTypes";
 import { AutocompleteData } from "./dataTypes";
 import { AppsyncSignatureHelpProvider } from "./AppsyncSignatureHelpProvider";
 
@@ -66,6 +65,5 @@ export default (ctx: vscode.ExtensionContext) => {
         '$' // triggered whenever a '$' is being typed
     );
 
-    context.forEach(register);
-    util.forEach(register);
+    allTypes.forEach(register);
 };
