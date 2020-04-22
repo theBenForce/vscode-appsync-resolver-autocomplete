@@ -3,7 +3,7 @@
 Adds autocomplete support for AppSync resolver templates when editing .vtl files.
 
 ![Release Workflow Status](https://img.shields.io/github/workflow/status/theBenForce/vscode-appsync-resolver-autocomplete/Release)
-![Visual Studio Marketplace Installs](https://img.shields.io/visual-studio-marketplace/i/thebenforce.appsync-resolver-autocomplete)
+[![Visual Studio Marketplace Installs](https://img.shields.io/visual-studio-marketplace/i/thebenforce.appsync-resolver-autocomplete)](https://marketplace.visualstudio.com/items?itemName=theBenForce.appsync-resolver-autocomplete)
 
 ![Preview](https://raw.githubusercontent.com/theBenForce/vscode-appsync-resolver-autocomplete/master/documentation/preview.png "Autocomplete preview")
 
