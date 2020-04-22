@@ -67,10 +67,12 @@
 			"semantic-release-vsce",
 			"@semantic-release/github"
 		],
-		"prepare": {
+		"prepare": ["@semantic-release/changelog",
+		    {
 			"path": "semantic-release-vsce",
 			"packageVsix": "appsync-resolver-autocomplete.vsix"
-		},
+			}
+		    ],
 		"publish": [
 			"semantic-release-vsce",
 			{
