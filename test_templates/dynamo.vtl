@@ -1,0 +1,9 @@
+#set($range = [0..5])
+
+{
+    "test": true
+#foreach($i in $range)
+    ,"idx_$i": "The $i index"
+#end
+
+}

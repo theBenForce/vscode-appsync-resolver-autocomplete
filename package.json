@@ -16,7 +16,8 @@
 		"Snippets"
 	],
 	"activationEvents": [
-		"onLanguage:velocity"
+		"onLanguage:velocity",
+		"onCommand:appsyncVtl.showPreview"
 	],
 	"contributes": {
 		"snippets": [
@@ -28,6 +29,21 @@
 		"signatureHelpProvider": {
 			"triggerCharacters": [
 				"("
+			]
+		},
+		"commands": [
+			{
+				"command": "appsyncVtl.showPreview",
+				"title": "AppSync Resolver: Velocity Preview"
+			}
+		],
+		"menus": {
+			"editor/title": [
+				{
+					"command": "appsyncVtl.showPreview",
+					"when": "resourceLangId == velocity",
+					"group": "navigation"
+				}
 			]
 		}
 	},
