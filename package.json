@@ -11,6 +11,9 @@
 		"type": "git+ssh",
 		"url": "git@github.com:theBenForce/vscode-appsync-resolver-autocomplete.git"
 	},
+	"bugs": {
+		"url": "https://github.com/theBenForce/vscode-appsync-resolver-autocomplete/issues"
+	},
 	"categories": [
 		"Other",
 		"Snippets"
