@@ -117,27 +117,28 @@
 	"devDependencies": {
 		"@semantic-release/changelog": "^5.0.1",
 		"@semantic-release/commit-analyzer": "^8.0.1",
-		"@semantic-release/github": "^7.0.5",
+		"@semantic-release/github": "^7.1.1",
 		"@semantic-release/release-notes-generator": "^9.0.1",
-		"@types/glob": "^7.1.1",
-		"@types/mocha": "^7.0.2",
-		"@types/node": "^13.11.0",
-		"@types/vscode": "^1.44.0",
-		"@typescript-eslint/eslint-plugin": "^2.26.0",
-		"@typescript-eslint/parser": "^2.26.0",
-		"commitizen": "^4.0.4",
-		"cz-conventional-changelog": "^3.1.0",
-		"eslint": "^6.8.0",
+		"@types/glob": "^7.1.3",
+		"@types/mocha": "^8.0.3",
+		"@types/node": "^14.11.1",
+		"@types/vscode": "^1.49.0",
+		"@typescript-eslint/eslint-plugin": "^4.1.1",
+		"@typescript-eslint/parser": "^4.1.1",
+		"commitizen": "^4.2.1",
+		"cz-conventional-changelog": "^3.3.0",
+		"eslint": "^7.9.0",
 		"glob": "^7.1.6",
-		"mocha": "^7.1.1",
-		"prettier": "^2.0.5",
-		"semantic-release": "^17.0.4",
+		"mocha": "^8.1.3",
+		"prettier": "^2.1.2",
+		"semantic-release": "^17.1.2",
 		"semantic-release-vsce": "^3.0.1",
-		"typescript": "^3.8.3",
-		"vsce": "^1.75.0",
-		"vscode-test": "^1.3.0"
+		"typescript": "^4.0.2",
+		"vsce": "^1.79.5",
+		"vscode-test": "^1.4.0"
 	},
 	"dependencies": {
-		"velocityjs": "^2.0.0"
+		"aws-sdk": "^2.755.0",
+		"velocityjs": "^2.0.1"
 	}
 }
