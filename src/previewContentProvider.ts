@@ -1,4 +1,5 @@
 import * as vscode from "vscode";
+import {Converter} from "aws-sdk/clients/dynamodb";
 import {render as renderVelocity} from "velocityjs";
 
 function isVelocityFile(document?: vscode.TextDocument): boolean {
@@ -32,7 +33,29 @@ export class VelocityPreviewProvider
 
     const content = editor?.document?.getText() ?? ``;
 
-    return renderVelocity(content);
+    const renderContext = {
+      util: {
+        toJson(vmString: any, context: any): string {
+          return JSON.stringify(vmString);
+        },
+        dynamodb: {
+          toMap(vmString: any, context: any): object {
+            return Converter.input(vmString);
+          },
+          toMapValues(vmString: any, context: any): object {
+            return Converter.marshall(vmString);
+          },
+          toMapJson(vmString: any, context: any): string {
+            return JSON.stringify(Converter.input(vmString));
+          },
+          toMapValuesJson(vmString: any, context: any): string {
+            return JSON.stringify(Converter.marshall(vmString));
+          }
+        }
+      }
+    };
+
+    return renderVelocity(content, renderContext);
   }
 
   async updatePreview() {}
