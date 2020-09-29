@@ -1,10 +1,10 @@
 import * as vscode from "vscode";
-import {Converter} from "aws-sdk/clients/dynamodb";
-import {render as renderVelocity} from "velocityjs";
+import { Converter } from "aws-sdk/clients/dynamodb";
+import Parser from "appsync-template-tester";
 
 function isVelocityFile(document?: vscode.TextDocument): boolean {
-    return document?.languageId === "velocity";
-  }
+  return document?.languageId === "velocity";
+}
 
 export class VelocityPreviewProvider
   implements vscode.TextDocumentContentProvider {
@@ -14,48 +14,34 @@ export class VelocityPreviewProvider
   private contentProviderRegistration: vscode.Disposable;
 
   static SCHEME = `appsyncvtl`;
-  static URI = vscode.Uri.parse(`${VelocityPreviewProvider.SCHEME}:preview.json`, true);
+  static URI = vscode.Uri.parse(
+    `${VelocityPreviewProvider.SCHEME}:preview.json`,
+    true
+  );
 
   constructor() {
-    this.contentProviderRegistration = vscode.workspace.registerTextDocumentContentProvider(VelocityPreviewProvider.SCHEME, this);
+    this.contentProviderRegistration = vscode.workspace.registerTextDocumentContentProvider(
+      VelocityPreviewProvider.SCHEME,
+      this
+    );
   }
 
   provideTextDocumentContent(
     uri: vscode.Uri,
     token: vscode.CancellationToken
   ): vscode.ProviderResult<string> {
-      const editor = vscode.window.activeTextEditor;
+    const editor = vscode.window.activeTextEditor;
 
-    if(!isVelocityFile(editor?.document)) {
-        console.error(`Wrong document type`);
-        return `Unknown document type "${editor?.document?.languageId}"`;
+    if (!isVelocityFile(editor?.document)) {
+      console.error(`Wrong document type`);
+      return `Unknown document type "${editor?.document?.languageId}"`;
     }
 
     const content = editor?.document?.getText() ?? ``;
 
-    const renderContext = {
-      util: {
-        toJson(vmString: any, context: any): string {
-          return JSON.stringify(vmString);
-        },
-        dynamodb: {
-          toMap(vmString: any, context: any): object {
-            return Converter.input(vmString);
-          },
-          toMapValues(vmString: any, context: any): object {
-            return Converter.marshall(vmString);
-          },
-          toMapJson(vmString: any, context: any): string {
-            return JSON.stringify(Converter.input(vmString));
-          },
-          toMapValuesJson(vmString: any, context: any): string {
-            return JSON.stringify(Converter.marshall(vmString));
-          }
-        }
-      }
-    };
+    const parser = new Parser(content);
 
-    return renderVelocity(content, renderContext);
+    return parser.resolve({});
   }
 
   async updatePreview() {}
@@ -76,15 +62,23 @@ export class VelocityPreviewProvider
     const provider = new VelocityPreviewProvider();
 
     context.subscriptions.push(
-      vscode.workspace.onDidChangeTextDocument(provider.onContentUpdated.bind(provider))
+      vscode.workspace.onDidChangeTextDocument(
+        provider.onContentUpdated.bind(provider)
+      )
     );
     context.subscriptions.push(
-      vscode.window.onDidChangeActiveTextEditor(provider.onContentUpdated.bind(provider))
+      vscode.window.onDidChangeActiveTextEditor(
+        provider.onContentUpdated.bind(provider)
+      )
     );
 
-    vscode.commands.registerCommand('appsyncVtl.showPreview', async () => {
-        let doc = await vscode.workspace.openTextDocument(this.URI);
-        await vscode.window.showTextDocument(doc, {preview: false, viewColumn: vscode.ViewColumn.Beside, preserveFocus: true});
+    vscode.commands.registerCommand("appsyncVtl.showPreview", async () => {
+      let doc = await vscode.workspace.openTextDocument(this.URI);
+      await vscode.window.showTextDocument(doc, {
+        preview: false,
+        viewColumn: vscode.ViewColumn.Beside,
+        preserveFocus: true,
+      });
     });
 
     return provider;

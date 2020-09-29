@@ -138,7 +138,7 @@
 		"vscode-test": "^1.4.0"
 	},
 	"dependencies": {
-		"aws-sdk": "^2.755.0",
-		"velocityjs": "^2.0.1"
+		"appsync-template-tester": "^1.0.9",
+		"aws-sdk": "^2.755.0"
 	}
 }
