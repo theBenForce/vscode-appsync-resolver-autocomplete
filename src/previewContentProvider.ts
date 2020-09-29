@@ -39,12 +39,10 @@ export class VelocityPreviewProvider
 
     const content = editor?.document?.getText() ?? ``;
 
-    const parser = new Parser(content);
+    const parser = new Parser(content.replace(/""/g, `\\"`));
 
     return parser.resolve({});
   }
-
-  async updatePreview() {}
 
   async onContentUpdated(
     event?: vscode.TextDocumentChangeEvent | vscode.TextEditor
