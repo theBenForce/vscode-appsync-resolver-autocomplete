@@ -139,6 +139,6 @@
 	},
 	"dependencies": {
 		"appsync-template-tester": "^1.0.9",
-		"aws-sdk": "^2.755.0"
+		"aws-sdk": "^2.814.0"
 	}
 }
